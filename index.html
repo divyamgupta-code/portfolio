@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divyam Gupta - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6c63ff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #6c63ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #ffd1dc, #ffb6c1);
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-item {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            color: #2c3e50;
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .education-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item .grade {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e17055;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: #6c63ff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: #5a52d5;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #ffd1dc, #ffb6c1);
+        }
+
+        .experience-item {
+            position: relative;
+            margin: 2rem 0;
+            width: 45%;
+        }
+
+        .experience-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .experience-item:nth-child(even) {
+            left: 55%;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #6c63ff;
+            border-radius: 50%;
+        }
+
+        .experience-item:nth-child(odd)::before {
+            right: -61px;
+        }
+
+        .experience-item:nth-child(even)::before {
+            left: -61px;
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .certification-card {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: #2c3e50;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certification-card::before {
+            content: '🏆';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #6c63ff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-timeline::before {
+                left: 20px;
+            }
+
+            .experience-item {
+                width: calc(100% - 40px);
+                left: 40px !important;
+            }
+
+            .experience-item::before {
+                left: -30px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Divyam Gupta</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#extracurricular">Extra Curricular</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Divyam Gupta</h1>
+                <p>Electronics & Computer Engineering Student | Buisness Analytics Enthusiast | AI Geek</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>+91 99880-46496</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>dgupta3_be22@thapar.edu</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://www.linkedin.com/in/divyam-gupta10/" target="_blank" style="color: inherit;">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">Professional Summary</h2>
+        <div class="card">
+            <p style="font-size: 1.1rem; text-align: center; line-height: 1.8;">
+                Motivated Engineering undergraduate with a strong foundation in business strategy, data analysis, and process optimization. Skilled in leveraging AI tools, SQL, Excel, and data visualization platforms to generate actionable insights and support data-driven decision-making. Passionate about using technology to enhance user experiences, improve operational efficiency, and solve real-world business problems.
+            </p>
+        </div>
+    </section>
+
+    <section id="education" class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="education-grid">
+            <div class="education-item">
+                <h3>Bachelor of Engineering – Electronics and Computers</h3>
+                <p>Thapar Institute of Engineering and Technology, Patiala, Punjab</p>
+                <p>Aug 2022 – May 2026</p>
+                <div class="grade">GPA: 7.15</div>
+            </div>
+            <div class="education-item">
+                <h3>Higher Secondary Certificate - Class XII CBSE</h3>
+                <p>D.A.V Public School, Ludhiana, Punjab</p>
+                <p>Academic Year 2020-22</p>
+                <div class="grade">83%</div>
+            </div>
+            <div class="education-item">
+                <h3>Senior Secondary Certificate - Class X CBSE</h3>
+                <p>D.A.V Public School, Ludhiana, Punjab</p>
+                <p>Academic Year 2019-20</p>
+                <div class="grade">88%</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title">Skills & Tools</h2>
+        <div class="skills-grid">
+            <div class="skill-tag">MS Excel</div>
+            <div class="skill-tag">MS Word</div>
+            <div class="skill-tag">Database Management</div>
+            <div class="skill-tag">Numerical Analysis</div>
+            <div class="skill-tag">Artificial Intelligence</div>
+            <div class="skill-tag">SQL</div>
+            <div class="skill-tag">Tableau</div>
+            <div class="skill-tag">Data Visualisation</div>
+            <div class="skill-tag">Power BI</div>
+            <div class="skill-tag">Business Analytics</div>
+            <div class="skill-tag">Market Research</div>
+            <div class="skill-tag">Decision Support</div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>AIWalaDashboard</h3>
+                    <p>June 2025</p>
+                </div>
+                <div class="project-content">
+                    <p>Created a no-code AI-powered web app that transforms uploaded CSV files into interactive dashboards using auto-generated charts, tables, and Excel-style filters (slicers). Designed for non-technical users to explore large datasets and gain actionable insights.</p>
+                    <a href="https://divyamgupta-code.github.io/AIwalaDashboard/" target="_blank">View Webpage</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Meesho return analysis Dashboard</h3>
+                    <p>July 2025</p>
+                </div>
+                <div class="project-content">
+                    <p>Created an AI-powered Power BI dashboard analyzing Meesho’s sales and returns data, using visual KPIs and charts for insights; designed an engaging AI-generated presentation to communicate findings within 5 minutes.</p>
+                    <a href="https://github.com/divyamgupta-code/meesho-sales-and-returns-analysis" target="_blank">View Dashboard</a>
+                </div>
+            </div>
+
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Factory Cost Optimization Dashboard</h3>
+                    <p>March 2025</p>
+                </div>
+                <div class="project-content">
+                    <p>Leveraged AI tools to analyze factory cost structures for Bain & Co. case competition, converting raw case data into actionable insights through an interactive dashboard. Showcased strategic decision-making and business analytics acumen.</p>
+                    <a href="https://divyamgupta-code.github.io/costanalysis_autoAI/" target="_blank">View Dashboard</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Jasmine Store Sales Dashboard</h3>
+                    <p>June 2025</p>
+                </div>
+                <div class="project-content">
+                    <p>Built an interactive Excel dashboard using pivot tables and charts to analyze customer demographics, sales trends, and top-performing states and platforms. Provided data-driven recommendations to boost sales.</p>
+                    <a href="https://github.com/divyamgupta-code/jasmine-store-dashboard/tree/main" target="_blank">View Dashboard</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>HR Analytics Dashboard</h3>
+                    <p>July 2025</p>
+                </div>
+                <div class="project-content">
+                    <p>Built an interactive Tableau dashboard analyzing employee attrition across departments, education levels, age groups, and job roles. Applied various visualizations to uncover trends and enable HR stakeholders to identify key risk zones.</p>
+                    <a href="https://github.com/divyamgupta-code/Hr_analytics_dashboard" target="_blank">View Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications" class="container">
+        <h2 class="section-title">Certifications</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <div class="card">
+                    <h3>Business Analyst Intern</h3>
+                    <p><strong>Finlatics</strong> | January 2025</p>
+                    <p>Assessed business projects and proposed solutions using data-driven decision-making approach. Learned and applied Power BI for data analysis and visualization.</p>
+                    <a href="https://drive.google.com/file/d/1-eoTBvu77cGJqE0udU2JCFkZqusc9KME/view?usp=sharing" target="_blank">View Certificate</a>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="card">
+                    <h3>Tata Group Data Analytics</h3>
+                    <p><strong>GenAI</strong> | July 2025</p>
+                    <p>Used GenAI tools for EDA to identify risk indicators and data quality issues; proposed a no-code predictive model for customer delinquency risk.</p>
+                    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/ifobHAoMjQs9s6bKS/gMTdCXwDdLYoXZ3wG_ifobHAoMjQs9s6bKS_rb5zjGBce4YB7pt9M_1753211647026_completion_certificate.pdf" target="_blank">View Certificate</a>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="card">
+                    <h3>BCG Business Strategy Consulting</h3>
+                    <p><strong>Job Simulation</strong> | September 2024</p>
+                    <p>Learned creative thinking by challenging assumptions. Used effective brainstorm strategies to generate ideas for a fictional luxury clothing company to increase sales revenue.</p>
+                    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/BCG%20/4Rfzeut8gXmNwfxXv_BCG%20_rb5zjGBce4YB7pt9M_1725213150457_completion_certificate.pdf" target="_blank">View Certificate</a>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="card">
+                    <h3>PowerBI using AI</h3>
+                    <p><strong>Workshop participant</strong> | July 2025</p>
+                    <p>Completed a Power BI workshop on building AI-powered interactive dashboards using GenAI, with hands-on experience in rapid dashboard creation and data visualization..</p>
+                    <a href="https://certx.in/certificate/36a28147-6eed-47a5-8342-e5f926ebba61532545" target="_blank">View Certificate</a>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="card">
+                    <h3>PwC US Management Consulting</h3>
+                    <p><strong>Job Simulation</strong> | July 2025</p>
+                    <p>Completed a job simulation on M&A diligence, building a synergy model and 3-slide deck to present key insights. Summarized findings in a concise email, highlighting analytical and communication skills.</p>
+                    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/CA4pBqsy4b4PdyaBP/douE8ih9jWMQ2P7sS_CA4pBqsy4b4PdyaBP_rb5zjGBce4YB7pt9M_1752835947801_completion_certificate.pdf" target="_blank">View Certificate</a>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="card">
+                    <h3>Microsoft Excel Using AI</h3>
+                    <p><strong>Workshop Participant</strong> | March 2025</p>
+                    <p>Gained hands-on experience in AI-powered data analysis and automation using Microsoft Excel. Applied AI tools for data visualization, trend forecasting, and creating dashboards.</p>
+                    <a href="https://certx.in/certificate/27e0774f-467d-45de-9d54-33382f67ff0e267500" target="_blank">View Certificate</a>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="card">
+                    <h3>Deloitte Australia Data Analytics</h3>
+                    <p><strong>Job Simulation</strong> | July 2025</p>
+                    <p>Completed data analysis and forensic technology simulation. Created data dashboards using Tableau and used Excel for data classification and business conclusions.</p>
+                    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_rb5zjGBce4YB7pt9M_1752668605917_completion_certificate.pdf" target="_blank">View Certificate</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="extracurricular" class="container">
+        <h2 class="section-title">Extra Curricular</h2>
+        <div class="certifications-grid">
+            <div class="certification-card">
+                <h3>Management Head – URJA 2025</h3>
+                <p><strong>Thapar Institute of Engineering and Technology</strong></p>
+                <p>Led the organization and execution of the institute's annual sports fest, managing sponsorships and event coordination. Oversaw a team of volunteers to ensure smooth operations across multiple sporting events and activities.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="tel:+919988046496">📞 +91 99880-46496</a>
+                <a href="mailto:dgupta3_be22@thapar.edu">📧 Email</a>
+                <a href="https://www.linkedin.com/in/divyam-gupta10/" target="_blank">💼 LinkedIn</a>
+            </div>
+            <p>&copy; 2025 Divyam Gupta. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for section animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotate(2deg)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add floating animation to cards
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
